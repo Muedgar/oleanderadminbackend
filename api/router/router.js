@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const {signup_post,login_post,getLoggedInUser, logout, changePassword, clearUserTable} = require("../controller/authControllers");
-const { getNotAloneInfo, saveNotAlone } = require("../controller/notalone");
+const { getNotAloneInfo, saveNotAlone, saveNews, getNews, saveSchoolEvent, getSchoolEvent,deleteNews, deleteEvent } = require("../controller/notalone");
 
 
 const { authorize } = require("../middleware/authorization");
@@ -9,6 +9,14 @@ const { authorize } = require("../middleware/authorization");
 
 router.get("/notaloneinfo",getNotAloneInfo)
 router.post("/savenotaloneinfo", authorize, saveNotAlone)
+
+router.get("/news", getNews);
+router.delete("/news/delete",authorize, deleteNews);
+router.post("/news/add", authorize, saveNews);
+
+router.get("/event", getSchoolEvent);
+router.delete("/event/delete",authorize,deleteEvent)
+router.post("/event/add", authorize, saveSchoolEvent);
 
 router.get("/", (req,res) => {
     res.status(200).json({
