@@ -9,7 +9,7 @@ const router = require("../api/router/router");
 
 const app = express();
 
-app.use(cors({credentials: true, origin:  ['https://www.admin.oleanderschool.com','https://admin.oleanderschool.com','https://www.oleanderschool.com','https://oleanderschool.com','http://localhost:3000']}));
+app.use(cors({credentials: true, origin:  ['https://www.admin.oleanderschool.com','https://admin.oleanderschool.com','https://www.oleanderschool.com','https://oleanderschool.com']}));
 app.use(express.json());
 
 app.use("/backend/api", router);
