@@ -30,5 +30,5 @@ const start  = async () => {
 start();
 
 app.get('/', (req,res) => {
-  res.status(200).json({status: "Server is ready..."});
+  res.status(200).json({status: "Server is ready and ready to receive requests..."});
 })
