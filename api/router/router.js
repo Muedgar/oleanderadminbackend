@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const {signup_post,login_post,getLoggedInUser, logout, changePassword, clearUserTable} = require("../controller/authControllers");
-const { getNotAloneInfo, saveNotAlone, saveNews, getNews, saveSchoolEvent, getSchoolEvent,deleteNews, deleteEvent, saveStaffInfo, deleteStaffInfo, getStaffInfo } = require("../controller/notalone");
+const { getNotAloneInfo, saveNotAlone, saveNews, getNews, saveSchoolEvent, getSchoolEvent,deleteNews, deleteEvent, saveStaffInfo, deleteStaffInfo, getStaffInfo, saveAdmissionInfo, getAdmissionInfo, saveSponsorInfo, getSponsorInfo } = require("../controller/notalone");
 
 
 const { authorize } = require("../middleware/authorization");
@@ -21,6 +21,12 @@ router.post("/event/add", authorize, saveSchoolEvent);
 router.get("/staff", getStaffInfo);
 router.delete("/staff/delete",authorize,deleteStaffInfo)
 router.post("/staff/add", authorize, saveStaffInfo);
+
+router.post("/admissions/add",saveAdmissionInfo)
+router.get("/admissions",getAdmissionInfo)
+
+router.post("/sponsors/add",saveSponsorInfo)
+router.get("/sponsors",getSponsorInfo)
 
 router.get("/", (req,res) => {
     res.status(200).json({

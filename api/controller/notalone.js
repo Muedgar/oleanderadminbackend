@@ -1,8 +1,9 @@
+const Admissions = require("../model/Admissions");
 const News = require("../model/News");
 const NOTALONE = require("../model/Notalone");
 const SchoolEvent = require("../model/SchoolEvent");
 const Staff = require("../model/Staff");
-
+const Sponsor = require("../model/Sponsor");
 const getNotAloneInfo = async(req,res) => {
     const notaloneinfo = await NOTALONE.find({}).exec();
     res.status(200).json(notaloneinfo);
@@ -91,9 +92,45 @@ const saveStaffInfo = async(req,res) => {
     }
 }
 
+const saveAdmissionInfo = async(req,res) => {
+    try {
+       
+        let obj = req.body;
+        await Admissions.create({admission: obj})
+        .then(d => {
+            res.status(201).json({message: 'information saved successfully.'})
+        })
+        .catch(e => new Error(e))
+    }catch(err) {
+        res.status(500).json({message: err.message})
+    }
+}
+
+const saveSponsorInfo = async(req,res) => {
+    try {
+       
+        let obj = req.body;
+        await Sponsor.create({sponsor: obj})
+        .then(d => {
+            res.status(201).json({message: 'information saved successfully.'})
+        })
+        .catch(e => new Error(e))
+    }catch(err) {
+        res.status(500).json({message: err.message})
+    }
+}
+
+const getAdmissionInfo = async(req,res) => {
+    const admininfo = await Admissions.find({}).exec();
+    res.status(200).json(admininfo);
+}
 const getStaffInfo = async(req,res) => {
     const staffinfo = await Staff.find({}).exec();
     res.status(200).json(staffinfo);
+}
+const getSponsorInfo = async(req,res) => {
+    const sponsorinfo = await Sponsor.find({}).exec();
+    res.status(200).json(sponsorinfo);
 }
 const deleteStaffInfo = async(req,res) => {
     try {
@@ -114,5 +151,9 @@ module.exports = {
     deleteEvent,
     saveStaffInfo,
     getStaffInfo,
-    deleteStaffInfo
+    deleteStaffInfo,
+    saveAdmissionInfo,
+    getAdmissionInfo,
+    saveSponsorInfo,
+    getSponsorInfo
 }
